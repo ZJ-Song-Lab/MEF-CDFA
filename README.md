@@ -10,7 +10,7 @@ MESG-CDFA may be used directly in a Python environment:
 ```python
 
 # Load a model
-model = YOLO("best.pt")
+model = YOLO("SOTA/weights/best.pt")
 
 # Train the model
 train_results = model.train(
