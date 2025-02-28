@@ -1,0 +1,19 @@
+nohup: 忽略输入
+/home/aaa/anaconda3/envs/song/lib/python3.9/site-packages/mmengine/optim/optimizer/zero_optimizer.py:11: DeprecationWarning: `TorchScript` support for functional optimizers is deprecated and will be removed in a future PyTorch release. Consider using the `torch.compile` optimizer instead.
+  from torch.distributed.optim import \
+Traceback (most recent call last):
+  File "/home/aaa/song/RT-DETR/RTDETR-20250206/RTDETR-main/train.py", line 6, in <module>
+    model = RTDETR('ultralytics/cfg/models/rt-detr/yolov8-MSEG-CDFA-OBB.yaml')
+  File "/home/aaa/song/RT-DETR/RTDETR-20250206/RTDETR-main/ultralytics/models/rtdetr/model.py", line 39, in __init__
+    super().__init__(model=model, task='detect')
+  File "/home/aaa/song/RT-DETR/RTDETR-20250206/RTDETR-main/ultralytics/engine/model.py", line 96, in __init__
+    self._new(model, task)
+  File "/home/aaa/song/RT-DETR/RTDETR-20250206/RTDETR-main/ultralytics/engine/model.py", line 129, in _new
+    cfg_dict = yaml_model_load(cfg)
+  File "/home/aaa/song/RT-DETR/RTDETR-20250206/RTDETR-main/ultralytics/nn/tasks.py", line 1038, in yaml_model_load
+    yaml_file = check_yaml(unified_path, hard=False) or check_yaml(path)
+  File "/home/aaa/song/RT-DETR/RTDETR-20250206/RTDETR-main/ultralytics/utils/checks.py", line 483, in check_yaml
+    return check_file(file, suffix, hard=hard)
+  File "/home/aaa/song/RT-DETR/RTDETR-20250206/RTDETR-main/ultralytics/utils/checks.py", line 475, in check_file
+    raise FileNotFoundError(f"'{file}' does not exist")
+FileNotFoundError: 'ultralytics/cfg/models/rt-detr/yolov8-MSEG-CDFA-OBB.yaml' does not exist

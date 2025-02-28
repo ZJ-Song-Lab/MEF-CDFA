@@ -1,0 +1,32 @@
+nohup: 忽略输入
+WARNING ⚠️ no model scale passed. Assuming scale='n'.
+Traceback (most recent call last):
+  File "/home/aaa/song/yolo_prune/ultralytics_yolo11_0119/train_ssdd.py", line 12, in <module>
+    model = YOLO('ultralytics/cfg/models/11/yolo11-CDFA-Edge_20.yaml')
+  File "/home/aaa/song/yolo_prune/ultralytics_yolo11_0119/ultralytics/models/yolo/model.py", line 23, in __init__
+    super().__init__(model=model, task=task, verbose=verbose)
+  File "/home/aaa/song/yolo_prune/ultralytics_yolo11_0119/ultralytics/engine/model.py", line 143, in __init__
+    self._new(model, task=task, verbose=verbose)
+  File "/home/aaa/song/yolo_prune/ultralytics_yolo11_0119/ultralytics/engine/model.py", line 251, in _new
+    self.model = (model or self._smart_load("model"))(cfg_dict, verbose=verbose and RANK == -1)  # build model
+  File "/home/aaa/song/yolo_prune/ultralytics_yolo11_0119/ultralytics/nn/tasks.py", line 500, in __init__
+    super().__init__(cfg=cfg, ch=ch, nc=nc, verbose=verbose)
+  File "/home/aaa/song/yolo_prune/ultralytics_yolo11_0119/ultralytics/nn/tasks.py", line 435, in __init__
+    raise e
+  File "/home/aaa/song/yolo_prune/ultralytics_yolo11_0119/ultralytics/nn/tasks.py", line 428, in __init__
+    m.stride = torch.tensor([s / x.shape[-2] for x in _forward(torch.zeros(2, ch, s, s))])  # forward
+  File "/home/aaa/song/yolo_prune/ultralytics_yolo11_0119/ultralytics/nn/tasks.py", line 425, in _forward
+    return self.forward(x)[0] if isinstance(m, SEGMENT_CLASS + POSE_CLASS + OBB_CLASS) else self.forward(x)
+  File "/home/aaa/song/yolo_prune/ultralytics_yolo11_0119/ultralytics/nn/tasks.py", line 152, in forward
+    return self.predict(x, *args, **kwargs)
+  File "/home/aaa/song/yolo_prune/ultralytics_yolo11_0119/ultralytics/nn/tasks.py", line 170, in predict
+    return self._predict_once(x, profile, visualize, embed)
+  File "/home/aaa/song/yolo_prune/ultralytics_yolo11_0119/ultralytics/nn/tasks.py", line 203, in _predict_once
+    x = m(x)  # run
+  File "/home/aaa/anaconda3/envs/yolo_song/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/aaa/anaconda3/envs/yolo_song/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/aaa/song/yolo_prune/ultralytics_yolo11_0119/ultralytics/nn/modules/conv.py", line 343, in forward
+    return torch.cat(x, self.d)
+RuntimeError: Sizes of tensors must match except in dimension 1. Expected size 40 but got size 20 for tensor number 1 in the list.
