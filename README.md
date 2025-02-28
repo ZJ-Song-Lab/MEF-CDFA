@@ -8,7 +8,6 @@ Pip install the ultralytics package including all requirements.txt in a [**Pytho
 MESG-CDFA may be used directly in a Python environment:
 
 ```python
-from ultralytics import YOLO
 
 # Load a model
 model = YOLO("best.pt")
