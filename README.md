@@ -5,7 +5,7 @@ Pip install the ultralytics package including all requirements.txt in a [**Pytho
 
 ### Python
 
-MESG-CDFA may be used directly in a Python environment:
+MEF-CDFA may be used directly in a Python environment:
 
 ```python
 
