@@ -87,8 +87,6 @@ class C2DA(C2PSA):
         
         self.m = nn.Sequential(*(DABlock(self.c, attn_ratio=0.5, num_heads=self.c // 64) for _ in range(n)))
 
-######################################## CrossFormer start ########################################
-
 class DynamicPosBias(nn.Module):
     r"""DPB module
     
@@ -229,5 +227,3 @@ class C2DPB(C2PSA):
         BS, C, H, W = b.size()
         b = self.m(b.flatten(2).permute(0, 2, 1)).permute(0, 2, 1).view([-1, C, H, W]).contiguous()
         return self.cv2(torch.cat((a, b), 1))
-        
-######################################## CrossFormer end ########################################
