@@ -30,9 +30,5 @@ results[0].show()
 # Export the model to ONNX format
 path = model.export(format="onnx")  # return path to exported model
 
-![Uploading MSEIS.jpg…]()
-
-
-
 
 ```
