@@ -30,22 +30,9 @@ results[0].show()
 # Export the model to ONNX format
 path = model.export(format="onnx")  # return path to exported model
 
-import os
+![Uploading MSEIS.jpg…]()
 
-# 图片路径
-image_paths = ["C:/Users/宋子京/Desktop/RT论文1/图/MSEIS.jpg"]
-# 保存结果的文件夹（不存在则创建）
-output_dir = "detection_results"
-os.makedirs(output_dir, exist_ok=True)
 
-for path in image_paths:
-    # 检测图像
-    results = model(path)
-    # 获取原图片文件名（用于命名结果文件）
-    img_name = os.path.basename(path)
-    # 保存路径
-    save_path = os.path.join(output_dir, f"detected_{img_name}")
-    # 保存结果
-    results[0].save(save_path)
-    print(f"检测结果已保存至：{save_path}")
+
+
 ```
