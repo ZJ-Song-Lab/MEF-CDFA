@@ -29,4 +29,9 @@ results[0].show()
 
 # Export the model to ONNX format
 path = model.export(format="onnx")  # return path to exported model
+
+image_paths = ["C:\Users\宋子京\Desktop\RT论文1\图\MSEIS.jpg"]
+for path in image_paths:
+    results = model(path)
+    results[0].show()
 ```
