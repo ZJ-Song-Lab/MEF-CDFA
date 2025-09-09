@@ -7,23 +7,9 @@ Accurate target localization in Synthetic Aperture Radar (SAR) ship detection he
 
 2. Contrast-Driven Feature Aggregation (CDFA): This module integrates Haar wavelet transforms and attention mechanisms to dynamically enhance edge detection and feature discriminability through multi-scale spectral analysis and contrast-aware weighting.
 
-3. Extensive experiments on SSDD and other public datasets demonstrate the effectiveness of our approach. The proposed framework achieves state-of-the-art accuracy on multiple benchmarks with computational efficiency.
+3. Our framework is a universal component that can be easily integrated into mainstream object detection architectures, including the YOLO and RT-DETR series. Extensive experiments on SSDD , RSDD-SAR and HRSID public datasets demonstrate the effectiveness of our approach. The proposed framework achieves state-of-the-art accuracy on multiple benchmarks with computational efficiency.
 
 [Paper PDF] (coming soon)
-[Project Page]
-
-## 🚀 Features
-General and Plug-and-Play: Our framework is a universal component that can be easily integrated into mainstream object detection architectures, including the YOLO and RT-DETR series.
-
-Significant Performance Improvement: On public datasets like SSDD, our method significantly improves detection accuracy while maintaining high computational efficiency.
-
-Edge-Aware: A unique modular design that effectively leverages crucial edge information in SAR images, solving issues of blurry edges and inaccurate localization common in traditional methods.
-
-## 📂 Datasets
-We evaluate on three widely-used SAR ship detection datasets:
-- **SSDD**: SAR Ship Detection Dataset
-- **RSDD-SAR**: Rotated SAR Ship Detection Dataset
-- **HRSID**: High-Resolution SAR Ship Detection Dataset
 
 ## ⚙️ Installation
 ```bash
@@ -34,8 +20,6 @@ cd MEF-CDFA
 # Install dependencies
 pip install -r requirements.txt
 ```
-
-
 
 ## 📸 Visualization
 
@@ -60,14 +44,6 @@ Our method achieved significant performance gains on multiple baseline architect
 
 <img src="./chart.png" width="80%">
 
----
-
-
-
-
-oject Page**: [GitHub](https://github.com/ZJ-Song-Lab/MSEIS_HAFB)
-
----
 
 ## 📜 License
 This project is released under the **MIT License**. See [LICENSE](./LICENSE) for details..
