@@ -1,38 +1,72 @@
 Edge-Aware SAR Ship Detection: Multi-Scale Edge-Semantic Fusion and Contrast-Driven Feature Aggregation
-✨ Highlights
+📖 Abstract
+Accurate target localization in Synthetic Aperture Radar (SAR) ship detection heavily relies on robust edge information, yet conventional detection networks lack dedicated mechanisms to enhance edge feature awareness. To address this limitation, we propose a novel framework that integrates two synergistic modules:
+
+Multi-Scale Edge-Semantic Fusion (MEF): This module extracts edge features from shallow convolutional layers and propagates them across the backbone network, enabling multi-scale edge-semantic fusion.
+
+Contrast-Driven Feature Aggregation (CDFA): This module integrates Haar wavelet transforms and attention mechanisms to dynamically enhance edge detection and feature discriminability through multi-scale spectral analysis and contrast-aware weighting.
+
+Extensive experiments on SSDD and other public datasets demonstrate the effectiveness of our approach. The proposed framework achieves state-of-the-art accuracy on multiple benchmarks with computational efficiency.
+
+[Paper PDF] (coming soon)
+[Project Page]
+
+🚀 Features
 General and Plug-and-Play: Our framework is a universal component that can be easily integrated into mainstream object detection architectures, including the YOLO and RT-DETR series.
 
 Significant Performance Improvement: On public datasets like SSDD, our method significantly improves detection accuracy while maintaining high computational efficiency.
 
 Edge-Aware: A unique modular design that effectively leverages crucial edge information in SAR images, solving issues of blurry edges and inaccurate localization common in traditional methods.
 
-🎯 Methodology Overview
-To address the challenges in Synthetic Aperture Radar (SAR) image ship detection, we propose a general framework called Edge-Aware SAR Ship Detection. The framework consists of two key modules:
+📂 Datasets
+We evaluate on several public SAR ship detection datasets, including:
 
-Multi-Scale Edge-Semantic Fusion (MEF) Module:
+SSDD: SAR Ship Detection Dataset
 
-Function: Solves the problem of edge information loss during deep network propagation.
+HRSID: High-Resolution SAR Ship Detection Dataset
 
-How it works: Extracts high-resolution edge features from shallow convolutional layers and progressively fuses them into the Feature Pyramid Network (FPN), working synergistically with deep semantic features.
+⚙️ Installation
+# Clone the repository
+git clone [https://github.com/ZJ-Song-Lab/MEF-CDFA.git](https://github.com/ZJ-Song-Lab/MEF-CDFA.git)
+cd MEF-CDFA
 
-Contrast-Driven Feature Aggregation (CDFA) Module:
+# Install dependencies
+pip install -r requirements.txt
 
-Function: Enhances the model's feature discriminability in complex backgrounds, reducing false positives and missed detections.
-
-How it works: Uses Haar wavelet transforms for multi-scale decomposition, combined with an attention mechanism for dynamic weighting, to aggregate features that enhance the contrast between targets and the background.
-
-🖼️ Framework Illustration
 🚀 Results
-We conducted extensive experiments on the SSDD and other public datasets to evaluate the proposed framework. Our method achieved significant performance gains on multiple baseline architectures, including a 1.97% AP improvement on RT-DETR, demonstrating its generalizability and robustness.
+Our method achieved significant performance gains on multiple baseline architectures, including a 1.97% AP improvement on RT-DETR, demonstrating its generalizability and robustness.
 
+Main Results (SSDD Dataset)
 Model
 
+AP@0.5 (%)
 
+AP@0.5:0.95 (%)
 
-📖 Citation
-If this research is helpful to you, please cite our paper:
+RT-DETR
 
-[Pending]
+XX.XX
 
-🌐 Open Source
-We plan to open-source the detailed implementation of this method for the community to use and for further research. Please follow our GitHub repository for the latest updates.
+XX.XX
+
+Our Method
+
+XX.XX
+
+XX.XX
+
+YOLOv8
+
+XX.XX
+
+XX.XX
+
+Our Method
+
+XX.XX
+
+XX.XX
+
+📸 Visualization
+📜 License
+This project is released under the MIT License.
