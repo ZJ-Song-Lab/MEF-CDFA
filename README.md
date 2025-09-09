@@ -1,34 +1,38 @@
-<details open>
-<summary>Install</summary>
+Edge-Aware SAR Ship Detection: Multi-Scale Edge-Semantic Fusion and Contrast-Driven Feature Aggregation
+✨ Highlights
+General and Plug-and-Play: Our framework is a universal component that can be easily integrated into mainstream object detection architectures, including the YOLO and RT-DETR series.
 
-Pip install the ultralytics package including all requirements.txt in a [**Python>=3.8**](https://www.python.org/) environment with [**PyTorch>=1.8**](https://pytorch.org/get-started/locally/).
+Significant Performance Improvement: On public datasets like SSDD, our method significantly improves detection accuracy while maintaining high computational efficiency.
 
-### Python
+Edge-Aware: A unique modular design that effectively leverages crucial edge information in SAR images, solving issues of blurry edges and inaccurate localization common in traditional methods.
 
-MEF-CDFA may be used directly in a Python environment:
+🎯 Methodology Overview
+To address the challenges in Synthetic Aperture Radar (SAR) image ship detection, we propose a general framework called Edge-Aware SAR Ship Detection. The framework consists of two key modules:
 
-```python
+Multi-Scale Edge-Semantic Fusion (MEF) Module:
 
-# Load a model
-model = YOLO("SOTA/weights/best.pt")
+Function: Solves the problem of edge information loss during deep network propagation.
 
-# Train the model
-train_results = model.train(
-    data="SSDD.yaml",  # path to dataset YAML
-    epochs=100,  # number of training epochs
-    imgsz=640,  # training image size
-    device="0", 
-)
+How it works: Extracts high-resolution edge features from shallow convolutional layers and progressively fuses them into the Feature Pyramid Network (FPN), working synergistically with deep semantic features.
 
-# Evaluate model performance on the validation set
-metrics = model.val()
+Contrast-Driven Feature Aggregation (CDFA) Module:
 
-# Perform object detection on an image
-results = model("path/to/image.jpg")
-results[0].show()
+Function: Enhances the model's feature discriminability in complex backgrounds, reducing false positives and missed detections.
 
-# Export the model to ONNX format
-path = model.export(format="onnx")  # return path to exported model
+How it works: Uses Haar wavelet transforms for multi-scale decomposition, combined with an attention mechanism for dynamic weighting, to aggregate features that enhance the contrast between targets and the background.
+
+🖼️ Framework Illustration
+🚀 Results
+We conducted extensive experiments on the SSDD and other public datasets to evaluate the proposed framework. Our method achieved significant performance gains on multiple baseline architectures, including a 1.97% AP improvement on RT-DETR, demonstrating its generalizability and robustness.
+
+Model
 
 
-```
+
+📖 Citation
+If this research is helpful to you, please cite our paper:
+
+[Pending]
+
+🌐 Open Source
+We plan to open-source the detailed implementation of this method for the community to use and for further research. Please follow our GitHub repository for the latest updates.
