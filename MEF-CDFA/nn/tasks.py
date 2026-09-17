@@ -1320,9 +1320,12 @@ def parse_model(d, ch, verbose=True, warehouse_manager=None):  # model_dict, inp
             c2 = make_divisible(min(args[0], max_channels) * width, 8)
             args = [[ch[x] for x in f], c2]
         elif m in {MutilScaleEdgeInfoGenetator}:
+            # MSEG is parameter-free (fixed Sobel + cascade max-pooling at r=1,2,4), so every
+            # scale keeps the host channel width c1; the 1x1 alignment to the semantic width
+            # is done inside ConvEdgeFusion (EGFF).
             c1 = ch[f]
-            c2 = [make_divisible(min(i, max_channels) * width, 8) for i in args[0]]
-            args = [c1, c2]
+            c2 = [c1] * (len(args[0]) if isinstance(args[0], (list, tuple)) else args[0])
+            args = [c1, args[0]]
         elif m in {MultiScaleGatedAttn}:
             c1 = [ch[x] for x in f]
             c2 = min(c1)

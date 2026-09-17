@@ -11,19 +11,23 @@ backbone:
   - [-1, 1, ConvNormLayer, [64, 3, 1, None, False, 'relu']] # 2
   - [-1, 1, nn.MaxPool2d, [3, 2, 1]] # 3-P2/4
 
-  - [-1, 1, MutilScaleEdgeInfoGenetator, [[64, 128, 256]]] # 4
-  - [4, 1, GetIndexOutput, [0]] # 5-P3/8
-  - [4, 1, GetIndexOutput, [1]] # 6-P4/16
-  - [4, 1, GetIndexOutput, [2]] # 7-P5/32
-  
   # [ch_out, block_type, block_nums, stage_num, act, variant]
-  - [3, 1, Blocks, [64, BasicBlock, 2, 2, 'relu']] # 8
-  - [-1, 1, Blocks, [128, BasicBlock, 2, 3, 'relu']] # 9-P3/8
-  - [[5, -1], 1, ConvEdgeFusion, [128]] # 10-P3/8
+  - [-1, 1, Blocks, [64, BasicBlock, 2, 2, 'relu']] # 4
+  - [-1, 1, Blocks, [128, BasicBlock, 2, 3, 'relu']] # 5-P3/8 (80x80, C=128)
+
+  # MSEG is parameter-free (fixed Sobel + cascaded max-pooling at r=1,2,4), so its three
+  # edge maps keep the host width C=128 at 80x80 / 40x40 / 20x20. Attaching it to ResNet-18
+  # stage 3 therefore aligns {E^(1), E^(2), E^(4)} with {P3, P4, P5} by construction.
+  - [-1, 1, MutilScaleEdgeInfoGenetator, [3]] # 6-MSEG on stage 3
+  - [6, 1, GetIndexOutput, [0]] # 7 edge r=1 -> aligned with P3/8
+  - [6, 1, GetIndexOutput, [1]] # 8 edge r=2 -> aligned with P4/16
+  - [6, 1, GetIndexOutput, [2]] # 9 edge r=4 -> aligned with P5/32
+
+  - [[7, 5], 1, ConvEdgeFusion, [128]] # 10-P3/8 EGFF
   - [-1, 1, Blocks, [256, BasicBlock, 2, 4, 'relu']] # 11-P4/16
-  - [[6, -1], 1, ConvEdgeFusion, [256]] # 12-P4/16
+  - [[8, -1], 1, ConvEdgeFusion, [256]] # 12-P4/16 EGFF
   - [-1, 1, Blocks, [512, BasicBlock, 2, 5, 'relu']] # 13-P5/32
-  - [[7, -1], 1, ConvEdgeFusion, [512]] # 14-P5/32
+  - [[9, -1], 1, ConvEdgeFusion, [512]] # 14-P5/32 EGFF
 
 head:
   - [-1, 1, Conv, [256, 1, 1, None, 1, 1, False]]  # 15 input_proj.2
@@ -38,7 +42,7 @@ head:
 
   - [-1, 1, nn.Upsample, [None, 2, 'nearest']] # 23
   - [10, 1, Conv, [256, 1, 1, None, 1, 1, False]]  # 24 input_proj.0
-  - [[-2, -1], 1, Concat, [1]]  # 25 cat backbone P4
+  - [[-2, -1], 1, Concat, [1]]  # 25 cat backbone P3
   - [-1, 3, RepC3, [256, 0.5]]    # X3 (26), fpn_blocks.1
 
   - [-1, 1, Conv, [256, 3, 2]]   # 27, downsample_convs.0
@@ -46,11 +50,11 @@ head:
   - [-1, 3, RepC3, [256, 0.5]]    # F4 (29), pan_blocks.0
 
   - [-1, 1, Conv, [256, 3, 2]]   # 30, downsample_convs.1
-  - [[-1, 17], 1, Concat, [1]]  # 21 cat Y5
+  - [[-1, 17], 1, Concat, [1]]  # 31 cat Y5
   - [-1, 3, RepC3, [256, 0.5]]    # F5 (32), pan_blocks.1
 
-  - [[5, 26], 1, ConvEdgeFusion, [256]] # 33-P3/8
-  - [[6, 29], 1, ConvEdgeFusion, [256]] # 34-P4/16
-  - [[7, 32], 1, ConvEdgeFusion, [256]] # 35-P5/32
+  - [[7, 26], 1, ConvEdgeFusion, [256]] # 33-P3/8 EGFF
+  - [[8, 29], 1, ConvEdgeFusion, [256]] # 34-P4/16 EGFF
+  - [[9, 32], 1, ConvEdgeFusion, [256]] # 35-P5/32 EGFF
 
-  - [[33, 34, 35], 1, RTDETRDecoder, [nc, 256, 300, 4, 8, 3]]  # Detect(P3, P4, P5)
+  - [[33, 34, 35], 1, RTDETRDecoder, [nc, 256, 300, 4, 8, 3]]  # 36 Detect(P3, P4, P5)
